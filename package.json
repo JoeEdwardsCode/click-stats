@@ -1,0 +1,22 @@
+{
+  "name": "click-stats",
+  "version": "1.0.0",
+  "description": "project for managing npm packages for click-stats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeEdwardsCode/click-stats.git"
+  },
+  "author": "Joe Edwards",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/JoeEdwardsCode/click-stats/issues"
+  },
+  "homepage": "https://github.com/JoeEdwardsCode/click-stats#readme",
+  "devDependencies": {
+    "serverless": "^3.21.0"
+  }
+}
