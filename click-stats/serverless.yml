@@ -1,0 +1,22 @@
+service: click-stats
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: go1.x
+
+ stage: dev
+ region: us-east-1
+
+package:
+  patterns:
+    - '!./**'
+    - ./bin/**
+
+functions:
+  hello:
+    handler: bin/clickHandler
+    events:
+      - httpApi:
+          path: /clickHandler
+          method: post
