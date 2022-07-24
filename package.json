@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy:dev": "sls deploy -r us-west-1 -s dev"
+    "deploy:dev": "npx sls deploy -r us-west-1 -s dev"
   },
   "repository": {
     "type": "git",
