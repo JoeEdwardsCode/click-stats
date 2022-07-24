@@ -4,7 +4,8 @@
   "description": "project for managing npm packages for click-stats",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy:dev": "sls deploy -r us-west-1 -s dev"
   },
   "repository": {
     "type": "git",
