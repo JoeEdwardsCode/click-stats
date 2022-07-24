@@ -16,3 +16,6 @@
 
 # NPM
 node_modules
+
+# Serverless framework files
+.serverless
