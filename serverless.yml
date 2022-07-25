@@ -14,7 +14,7 @@ package:
     - ./bin/**
 
 functions:
-  hello:
+  recordClick:
     handler: bin/clickHandler
     events:
       - httpApi:
