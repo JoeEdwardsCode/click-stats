@@ -15,10 +15,10 @@ package:
 
 functions:
   recordClick:
-    handler: bin/clickHandler
+    handler: bin/clickEventHandler
     events:
       - httpApi:
-          path: /clickHandler
+          path: /click-event
           method: post
 
 resources:

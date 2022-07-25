@@ -6,7 +6,7 @@ build:
 		${MAKE} ${MAKEOPTS} $(foreach function,${FUNCTIONS}, build-${function})
 
 build-%:
-		cd functions/$* && GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -o ../../bin/${%}
+		cd functions/$* && env GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -v -ldflags="-s -w" -o ../../bin/${%}
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
