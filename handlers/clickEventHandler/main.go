@@ -10,19 +10,21 @@ import (
 	"github.com/JoeEdwardsCode/click-stats/utils"
 )
 
-func ClickEventHandler(ctx context.Context) (events.APIGatewayProxyResponse, error) {
+func ClickEventHandler(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var applicationError error
+	var response events.APIGatewayProxyResponse
 
 	body, applicationError := json.Marshal(map[string]interface{}{
 		"message": "click recorded",
 	})
 
 	if applicationError != nil {
-		return events.APIGatewayProxyResponse{StatusCode: 400}, applicationError
+		errorBuffer := []byte(applicationError.Error())
+		response = utils.ClickStatsResponse(400, errorBuffer)
+		return response, nil
 	}
 
-	response := utils.ClickStatsResponse(200, body)
-
+	response = utils.ClickStatsResponse(200, body)
 	return response, nil
 }
 
