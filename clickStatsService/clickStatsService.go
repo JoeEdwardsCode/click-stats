@@ -1,4 +1,4 @@
-package clickstatsservice
+package clickStatsService
 
 import (
 	"context"
