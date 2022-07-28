@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/JoeEdwardsCode/click-stats#readme",
   "devDependencies": {
-    "serverless": "^3.21.0"
+    "serverless": "^3.21.0",
+    "serverless-iam-roles-per-function": "^3.2.0"
   }
 }
