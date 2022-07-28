@@ -11,18 +11,17 @@ import (
 )
 
 func ClickEventHandler(context context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	var applicationError error
 	var response events.APIGatewayProxyResponse
-
-	serviceResponse, applicationError := clickStatsService.RecordClickEvent(context, event)
+	applicationError := clickStatsService.RecordClickEvent(event)
 
 	if applicationError != nil {
 		errorBuffer := []byte(applicationError.Error())
-		response = utils.ClickStatsResponse(400, errorBuffer)
+		response = utils.ClickStatsResponse(500, errorBuffer)
 		return response, nil
 	}
 
-	response = utils.ClickStatsResponse(200, serviceResponse)
+	responseText := "click recorded"
+	response = utils.ClickStatsResponse(200, []byte(responseText))
 	return response, nil
 }
 
