@@ -19,3 +19,6 @@ node_modules
 
 # Serverless framework files
 .serverless
+
+# Vendor dependencies
+vendor
