@@ -4,9 +4,16 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: go1.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-west-1'}
+  logs:
+    restApi: true
+  environment:
+    STAGE: ${opt:stage, 'dev'}
+    TABLE_NAME: click_events_table_${opt:stage, 'dev'}
 
-  stage: dev
-  region: us-west-1
+custom:
+  clickEventsTable: arn:aws:dynamodb:${self:provider.region}:*:table/click_events_table_${opt:stage, 'dev'}
 
 package:
   patterns:
@@ -20,13 +27,18 @@ functions:
       - httpApi:
           path: /click-event
           method: post
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: ${self:custom.clickEventsTable}
 
 resources:
   Resources:
-    usersTable:
+    clickEventsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: clickEvents
+        TableName: click_events_table_${opt:stage, 'dev'}
         AttributeDefinitions:
           - AttributeName: record_type
             AttributeType: S
@@ -70,3 +82,6 @@ resources:
             Projection: 
               ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
+
+plugins:
+  - serverless-iam-roles-per-function
