@@ -6,7 +6,8 @@ import (
 	"errors"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
 type ClickEvent struct {
@@ -30,17 +31,18 @@ func getClickEvent(eventBody []byte) (ClickEvent, error) {
 }
 
 func recordClick(clickEvent ClickEvent) ([]byte, error) {
+	var tableName string = "clickEvents"
 	input := &dynamodb.PutItemInput{
 		Item:      nil,
-		TableName: "clickEvents",
+		TableName: &tableName,
 	}
 
-	// config, configError := config.LoadDefaultConfig(context.TODO())
-	// if configError != nil {
-	// 	return nil, configError
-	// }
+	config, configError := config.LoadDefaultConfig(context.TODO())
+	if configError != nil {
+		return nil, configError
+	}
 
-	// client := dynamodb.NewFromConfig(config)
+	client := dynamodb.(config)
 
 	// response, putError := client.PutItem(context.TODO(), input)
 	return nil, nil
