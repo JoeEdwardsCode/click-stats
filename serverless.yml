@@ -15,7 +15,7 @@ package:
 
 functions:
   recordClick:
-    handler: bin/clickEventHandler
+    handler: bin/clickHandler
     events:
       - httpApi:
           path: /click-event
@@ -39,7 +39,7 @@ resources:
           - AttributeName: quadrant
             AttributeType: S
         KeySchema:
-          - AttributeName: event_type
+          - AttributeName: record_type
             KeyType: HASH
           - AttributeName: timestamp
             KeyType: RANGE
