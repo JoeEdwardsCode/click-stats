@@ -15,7 +15,7 @@ package:
 
 functions:
   recordClick:
-    handler: bin/clickHandler
+    handler: bin/clickEventHandler
     events:
       - httpApi:
           path: /click-event
