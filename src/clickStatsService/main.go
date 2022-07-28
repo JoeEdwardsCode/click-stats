@@ -30,7 +30,7 @@ func getClickEvent(eventBody []byte) (ClickEvent, error) {
 	return clickEvent, nil
 }
 
-func recordClick(clickEvent ClickEvent) ([]byte, error) {
+func recordClick(clickEvent ClickEvent) (*dynamodb.PutItemOutput, error) {
 	var tableName string = "clickEvents"
 	input := &dynamodb.PutItemInput{
 		Item:      nil,
@@ -42,23 +42,22 @@ func recordClick(clickEvent ClickEvent) ([]byte, error) {
 		return nil, configError
 	}
 
-	client := dynamodb.(config)
+	client := dynamodb.NewFromConfig(config)
 
-	// response, putError := client.PutItem(context.TODO(), input)
-	return nil, nil
+	return client.PutItem(context.TODO(), input)
 }
 
 func RecordClickEvent(context context.Context, event events.APIGatewayProxyRequest) ([]byte, error) {
-	var applicationError error
-	eventBody := []byte(event.Body)
+	// var applicationError error
+	// eventBody := []byte(event.Body)
 
-	clickEvent, applicationError := getClickEvent(eventBody)
+	// clickEvent, applicationError := getClickEvent(eventBody)
 
-	if applicationError != nil {
-		return nil, applicationError
-	}
+	// if applicationError != nil {
+	// 	return nil, applicationError
+	// }
 
-	recordClickEventResponse, applicationError := recordClick(clickEvent)
+	// recordClickEventResponse, applicationError := recordClick(clickEvent)
 
-	return recordClickEventResponse, nil
+	return nil, nil
 }
