@@ -28,13 +28,45 @@ resources:
       Properties:
         TableName: clickEvents
         AttributeDefinitions:
-          - AttributeName: event_type
+          - AttributeName: record_type
             AttributeType: S
           - AttributeName: timestamp
+            AttributeType: S
+          - AttributeName: shape
+            AttributeType: S
+          - AttributeName: color
+            AttributeType: S
+          - AttributeName: quadrant
             AttributeType: S
         KeySchema:
           - AttributeName: event_type
             KeyType: HASH
           - AttributeName: timestamp
             KeyType: RANGE
+        #  This allows efficient access of shape, color, or quadrant specific stats 
+        GlobalSecondaryIndexes:
+          - IndexName: shapeEvents
+            KeySchema:
+              - AttributeName: shape
+                KeyType: HASH
+              - AttributeName: timestamp
+                KeyType: RANGE
+            Projection: 
+              ProjectionType: ALL
+          - IndexName: colorEvents
+            KeySchema:
+              - AttributeName: color
+                KeyType: HASH
+              - AttributeName: timestamp
+                KeyType: RANGE
+            Projection: 
+              ProjectionType: ALL
+          - IndexName: quadrantEvents
+            KeySchema:
+              - AttributeName: quadrant
+                KeyType: HASH
+              - AttributeName: timestamp
+                KeyType: RANGE
+            Projection: 
+              ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
