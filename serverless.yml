@@ -6,6 +6,8 @@ provider:
   runtime: go1.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-west-1'}
+  httpApi:
+    cors: true
   logs:
     restApi: true
   environment:
@@ -14,6 +16,7 @@ provider:
 
 custom:
   clickEventsTable: arn:aws:dynamodb:${self:provider.region}:*:table/click_events_table_${opt:stage, 'dev'}
+
 
 package:
   patterns:
